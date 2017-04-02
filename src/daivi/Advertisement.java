@@ -8,8 +8,9 @@ public class Advertisement {
 		return MessageFormat.format("{0}.adassist", section.name().toLowerCase());
 	}
 
-	public static PageToServe handleRequestToAdvertise(Section section) {
-		return new PageToServe(assistPageFor(section));
+	public static PageToServe handleRequestToAdvertise(String section) {
+		Section sectionEnum = Section.valueOf(section.toUpperCase());
+		return new PageToServe(assistPageFor(sectionEnum));
 	}
 
 }

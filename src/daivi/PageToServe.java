@@ -2,10 +2,14 @@ package daivi;
 
 public class PageToServe {
 
-	private String name;
+	private final String name;
 
 	public PageToServe(String pageName) {
 		name = pageName;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override
