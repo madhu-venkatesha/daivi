@@ -14,9 +14,30 @@ public class AdvertisementTest {
 	}
 	
 	@Test
-	public void requestToAdvertiseInvalidSectionServesErrorPage() {
+	public void requestToAdvertiseNullSectionServesErrorPage() {
 		PageToServe pageToServe = Advertisement.handleRequestToAdvertise(null);
-		PageToServe expectedPageToServe = new PageToServe("error.msg");
+		PageToServe expectedPageToServe = new PageToServe("error.html");
+		assertEquals(expectedPageToServe, pageToServe);
+	}
+	
+	@Test
+	public void requestToAdvertiseEmptySectionServesErrorPage() {
+		PageToServe pageToServe = Advertisement.handleRequestToAdvertise("");
+		PageToServe expectedPageToServe = new PageToServe("error.html");
+		assertEquals(expectedPageToServe, pageToServe);
+	}
+	
+	@Test
+	public void requestToAdvertiseBlankSectionServesErrorPage() {
+		PageToServe pageToServe = Advertisement.handleRequestToAdvertise("    ");
+		PageToServe expectedPageToServe = new PageToServe("error.html");
+		assertEquals(expectedPageToServe, pageToServe);
+	}
+	
+	@Test
+	public void requestToAdvertiseInvalidSectionServesErrorPage() {
+		PageToServe pageToServe = Advertisement.handleRequestToAdvertise("satSang");
+		PageToServe expectedPageToServe = new PageToServe("error.html");
 		assertEquals(expectedPageToServe, pageToServe);
 	}
 	

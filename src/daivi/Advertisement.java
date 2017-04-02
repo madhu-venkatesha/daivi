@@ -4,13 +4,22 @@ import java.text.MessageFormat;
 
 public class Advertisement {
 
-	private static String assistPageFor(Section section) {
-		return MessageFormat.format("{0}.adassist", section.name().toLowerCase());
+	private static String assistPageFor(String section) {
+		return MessageFormat.format("{0}.adassist", section);
 	}
 
 	public static PageToServe handleRequestToAdvertise(String section) {
-		Section sectionEnum = Section.valueOf(section.toUpperCase());
-		return new PageToServe(assistPageFor(sectionEnum));
+		if (section == null) {
+			return new PageToServe("error.html");
+		}
+
+		switch (section) {
+		case "satsang":
+			return new PageToServe(assistPageFor(section));
+			
+		default:
+			return new PageToServe("error.html");
+		}
 	}
 
 }
