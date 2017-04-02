@@ -19,8 +19,17 @@ public class AdvertisementTest {
 		
 		protected final String section;
 
-		public RequestToAdvertiseASection(String section) {
+		protected RequestToAdvertiseASection(String section) {
 			this.section = section;
+		}
+		
+		protected PageToServe expectedPageToServe() {
+			return null;
+		}
+		
+		@Test
+		public void test() {
+			assertEquals(expectedPageToServe(), Advertisement.handleRequestToAdvertise(section));
 		}
 		
 		@RunWith(Parameterized.class)
@@ -40,11 +49,9 @@ public class AdvertisementTest {
 				super(section);
 			}
 			
-			@Test
-			public void requestToAdvertiseInvalidSectionServesErrorPage() {
-				PageToServe pageToServe = Advertisement.handleRequestToAdvertise(section);
-				PageToServe expectedPageToServe = new PageToServe("error.html");
-				assertEquals(expectedPageToServe, pageToServe);
+			@Override
+			protected PageToServe expectedPageToServe() {
+				return new PageToServe("error.html");
 			}
 		}
 		
@@ -62,11 +69,9 @@ public class AdvertisementTest {
 				super(section);
 			}
 			
-			@Test
-			public void requestToAdvertiseInvalidSectionServesErrorPage() {
-				PageToServe pageToServe = Advertisement.handleRequestToAdvertise(section);
-				PageToServe expectedPageToServe = new PageToServe(MessageFormat.format("{0}.adassist", section));
-				assertEquals(expectedPageToServe, pageToServe);
+			@Override
+			protected PageToServe expectedPageToServe() {
+				return new PageToServe(MessageFormat.format("{0}.adassist", section));
 			}
 		}
 	}

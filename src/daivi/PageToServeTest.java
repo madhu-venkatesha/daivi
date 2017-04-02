@@ -13,4 +13,8 @@ public class PageToServeTest {
 		assertNotEquals(new PageToServe("x.html"), null);
 	}
 
+	@Test
+	public void testToString() {
+		assertEquals("x.html", new PageToServe("x.html").toString());
+	}
 }

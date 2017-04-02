@@ -20,4 +20,9 @@ public class PageToServe {
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }
