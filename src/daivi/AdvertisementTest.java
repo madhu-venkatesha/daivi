@@ -2,43 +2,67 @@ package daivi;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import java.text.MessageFormat;
+import java.util.Arrays;
 
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(Enclosed.class)
 public class AdvertisementTest {
 
-	@Test
-	public void requestToAdvertiseSatsangServesPageToAssistIt() {
-		PageToServe pageToServe = Advertisement.handleRequestToAdvertise("satsang");
-		PageToServe expectedPageToServe = new PageToServe("satsang.adassist");
-		assertEquals(expectedPageToServe, pageToServe);
+	@RunWith(Parameterized.class)
+	public static class RequestToAdvertiseInvalidSectionServesErrorPage {
+
+		private final String section;
+
+		@Parameters
+		public static Iterable<Object[]> data() {
+			return Arrays.asList(new Object[][] {
+				{null},
+				{""},
+				{"    "},
+				{"satSang"}
+			});
+		}
+
+		public RequestToAdvertiseInvalidSectionServesErrorPage(String section) {
+			this.section = section;
+		}
+		
+		@Test
+		public void requestToAdvertiseInvalidSectionServesErrorPage() {
+			PageToServe pageToServe = Advertisement.handleRequestToAdvertise(section);
+			PageToServe expectedPageToServe = new PageToServe("error.html");
+			assertEquals(expectedPageToServe, pageToServe);
+		}
 	}
 	
-	@Test
-	public void requestToAdvertiseNullSectionServesErrorPage() {
-		PageToServe pageToServe = Advertisement.handleRequestToAdvertise(null);
-		PageToServe expectedPageToServe = new PageToServe("error.html");
-		assertEquals(expectedPageToServe, pageToServe);
-	}
-	
-	@Test
-	public void requestToAdvertiseEmptySectionServesErrorPage() {
-		PageToServe pageToServe = Advertisement.handleRequestToAdvertise("");
-		PageToServe expectedPageToServe = new PageToServe("error.html");
-		assertEquals(expectedPageToServe, pageToServe);
-	}
-	
-	@Test
-	public void requestToAdvertiseBlankSectionServesErrorPage() {
-		PageToServe pageToServe = Advertisement.handleRequestToAdvertise("    ");
-		PageToServe expectedPageToServe = new PageToServe("error.html");
-		assertEquals(expectedPageToServe, pageToServe);
-	}
-	
-	@Test
-	public void requestToAdvertiseInvalidSectionServesErrorPage() {
-		PageToServe pageToServe = Advertisement.handleRequestToAdvertise("satSang");
-		PageToServe expectedPageToServe = new PageToServe("error.html");
-		assertEquals(expectedPageToServe, pageToServe);
+	@RunWith(Parameterized.class)
+	public static class RequestToAdvertiseASectionServesPageToAssistIt {
+		
+		private final String section;
+		
+		@Parameters
+		public static Iterable<Object[]> data() {
+			return Arrays.asList(new Object[][] {
+				{"satsang"}
+			});
+		}
+		
+		public RequestToAdvertiseASectionServesPageToAssistIt(String section) {
+			this.section = section;
+		}
+		
+		@Test
+		public void requestToAdvertiseInvalidSectionServesErrorPage() {
+			PageToServe pageToServe = Advertisement.handleRequestToAdvertise(section);
+			PageToServe expectedPageToServe = new PageToServe(MessageFormat.format("{0}.adassist", section));
+			assertEquals(expectedPageToServe, pageToServe);
+		}
 	}
 	
 }
