@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.Test;
-import org.springframework.ui.Model;
 
 import daivi.Advertisement;
 import daivi.PageToServe;
@@ -21,12 +20,9 @@ public class AdvertisementControllerTest {
 		when(pageToServe.getName()).thenReturn(sectionAdassistPagename);
 		when(advertisement.handleRequestToAdvertise(section)).thenReturn(pageToServe);
 		
-		Model model = mock(Model.class);
-
-		String viewName = new AdvertisementController(advertisement).handleRequestToAdvertise(section, model);
+		String viewName = new AdvertisementController(advertisement).handleRequestToAdvertise(section);
 
 		assertEquals(sectionAdassistPagename, viewName);
-		verifyZeroInteractions(model);
 	}
 
 }
