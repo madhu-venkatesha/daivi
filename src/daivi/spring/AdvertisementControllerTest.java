@@ -13,7 +13,6 @@ public class AdvertisementControllerTest {
 
 	@Test
 	public void requestToAdvertiseSatsangServesPageToAssistIt() {
-		Model model = mock(Model.class);
 		String section = "satsang";
 		String sectionAdassistPagename = "satsang.adassist";
 		
@@ -22,6 +21,8 @@ public class AdvertisementControllerTest {
 		when(pageToServe.getName()).thenReturn(sectionAdassistPagename);
 		when(advertisement.handleRequestToAdvertise(section)).thenReturn(pageToServe);
 		
+		Model model = mock(Model.class);
+
 		String viewName = new AdvertisementController(advertisement).handleRequestToAdvertise(section, model);
 
 		assertEquals(sectionAdassistPagename, viewName);
