@@ -8,7 +8,7 @@ public class Advertisement {
 		return MessageFormat.format("{0}.adassist", section);
 	}
 
-	public static PageToServe handleRequestToAdvertise(String section) {
+	public PageToServe handleRequestToAdvertise(String section) {
 		if (section == null) {
 			return new PageToServe("error.html");
 		}

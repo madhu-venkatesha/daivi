@@ -17,19 +17,20 @@ public class AdvertisementTest {
 	@RunWith(Enclosed.class)
 	public static class RequestToAdvertiseASection {
 		
+		private static final Advertisement ADVERTISEMENT = new Advertisement();
 		protected final String section;
 
 		protected RequestToAdvertiseASection(String section) {
 			this.section = section;
 		}
 		
-		protected PageToServe expectedPageToServe() {
-			return null;
-		}
-		
 		@Test
 		public void test() {
-			assertEquals(expectedPageToServe(), Advertisement.handleRequestToAdvertise(section));
+			assertEquals(expectedPageToServe(), ADVERTISEMENT.handleRequestToAdvertise(section));
+		}
+		
+		protected PageToServe expectedPageToServe() {
+			return null;
 		}
 		
 		@RunWith(Parameterized.class)

@@ -6,8 +6,14 @@ import daivi.Advertisement;
 
 public class AdvertisementController {
 
+	private final Advertisement advertisement;
+
+	public AdvertisementController(Advertisement advertisement) {
+		this.advertisement = advertisement;
+	}
+
 	public String handleRequestToAdvertise(String section, Model model) {
-		return Advertisement.handleRequestToAdvertise(section).getName();
+		return advertisement.handleRequestToAdvertise(section).getName();
 	}
 
 }
