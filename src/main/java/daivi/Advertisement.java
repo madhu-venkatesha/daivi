@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 public class Advertisement {
 
 	private static String assistPageFor(String section) {
-		return MessageFormat.format("{0}.adassist", section);
+		return MessageFormat.format("info/daivi/adassist/{0}.html", section);
 	}
 
 	public PageToServe handleRequestToAdvertise(String section) {

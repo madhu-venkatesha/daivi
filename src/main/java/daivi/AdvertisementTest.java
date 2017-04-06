@@ -72,7 +72,7 @@ public class AdvertisementTest {
 			
 			@Override
 			protected PageToServe expectedPageToServe() {
-				return new PageToServe(MessageFormat.format("{0}.adassist", section));
+				return new PageToServe(MessageFormat.format("info/daivi/adassist/{0}.html", section));
 			}
 		}
 	}
