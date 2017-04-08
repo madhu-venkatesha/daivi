@@ -52,7 +52,7 @@ public class AdvertisementTest {
 			
 			@Override
 			protected PageToServe expectedPageToServe() {
-				return new PageToServe("error.html");
+				return new PageToServe("info/daivi/error.html");
 			}
 		}
 		

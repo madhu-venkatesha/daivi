@@ -10,7 +10,7 @@ public class Advertisement {
 
 	public PageToServe handleRequestToAdvertise(String section) {
 		if (section == null) {
-			return new PageToServe("error.html");
+			return new PageToServe(Constants.ERROR_HTML_CPATH);
 		}
 
 		switch (section) {
@@ -18,7 +18,7 @@ public class Advertisement {
 			return new PageToServe(assistPageFor(section));
 			
 		default:
-			return new PageToServe("error.html");
+			return new PageToServe(Constants.ERROR_HTML_CPATH);
 		}
 	}
 
